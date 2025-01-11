@@ -1,0 +1,154 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Navigation bar styling */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem 0;
+    z-index: 2; /* Above everything else */
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s;
+}
+
+.navbar a:hover {
+    color: lightblue;
+}
+
+/* Content styling */
+.content {
+    margin-top: 80px; /* To avoid overlapping with the navbar */
+    padding: 2rem;
+}
+
+/* Section styling */
+section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border: 1px solid #ccc;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    opacity: 0; /* Initially hidden */
+    animation: fadeIn 1s ease-in-out forwards; /* Animation on load */
+}
+
+/* Section fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hover effect for sections */
+section:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02); /* Subtle zoom effect */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Highlight for active section */
+section.active {
+    background-color: #f0f8ff;
+    border-color: #87cefa;
+    transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+
+/* List styling for tasks and skills */
+section ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+}
+
+section ul li {
+    margin-bottom: 0.5rem;
+}
+
+/* Button styling */
+button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #2e2e2e;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Highlighted text for contact info */
+.contact-highlight {
+    background-color: #ffe4b5;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.5s ease;
+}
+
+.contact-highlight:hover {
+    background-color: #ffcc80;
+}
+
+/* Footer styling */
+.footer {
+    background-color: #2e2e2e;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer a {
+    color: lightblue;
+    text-decoration: none;
+    margin: 0 1rem;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: white;
+}
+
+.footer-icon {
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    filter: invert(1); /* Invert black to white */
+    transition: filter 0.3s ease;
+}
+
+.footer-icon:hover {
+    filter: invert(0.8) brightness(1.2); /* Slightly change on hover for effect */
+}

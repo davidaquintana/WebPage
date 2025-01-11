@@ -1,0 +1,137 @@
+/* General body styling for dark gray background */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Prevent scrolling caused by overflow */
+    background-color: #2e2e2e; /* Dark gray background */
+    color: white; /* Default text color for readability */
+}
+
+/* Navigation bar styling */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem 0;
+    z-index: 2; /* Above everything else */
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s;
+}
+
+.navbar a:hover {
+    color: lightblue; /* Highlight on hover */
+}
+
+/* Background container for the streamgraph */
+#background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensure it is behind the content */
+}
+
+/* Styling for overlay content */
+.content {
+    position: relative;
+    z-index: 1; /* Place content above the background */
+    text-align: center;
+    padding-top: 15%;
+}
+
+.content h1 {
+    margin: 0;
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Subtle shadow for text */
+}
+
+.content p {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Subtle shadow for text */
+}
+
+/* SVG paths styling for the streamgraph */
+#background path {
+    opacity: 0.9; /* Slight transparency for blending */
+    transition: opacity 0.2s ease-in-out;
+}
+
+#background path:hover {
+    opacity: 1; /* Brighten when hovered */
+}
+
+/* Profile circle styling */
+.profile-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px; /* Set the circle size */
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid white; /* Optional border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.profile-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image scales properly within the circle */
+}
+
+/* Footer styling */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 0;
+    z-index: 2;
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.footer a {
+    color: lightblue;
+    text-decoration: none;
+    margin: 0 1rem;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: white; /* Highlight the link on hover */
+}
+
+.footer-icon {
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    filter: invert(1); /* Invert black to white */
+    transition: filter 0.3s ease;
+}
+
+.footer-icon:hover {
+    filter: invert(0.8) brightness(1.2); /* Slightly change on hover for effect */
+}

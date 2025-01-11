@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Website with Streamgraph Background</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="../HomePage/index.html">Home</a>
+        <a href="../ProjectsPage/index.html">Projects</a>
+        <a href="../ResumePage/index.html">Resume</a> <!-- Updated link to the Resume page -->
+    </nav>
+
+    <!-- Background for Streamgraph -->
+    <div id="background"></div>
+
+    <!-- Circular Profile Image -->
+    <div class="profile-circle">
+        <img src="./web_photo.jpg" alt="Profile Picture">
+    </div>
+
+    <!-- Content Sections -->
+    <div class="content" id="home">
+        <h1>Football in D3</h1>
+        <p>NFL Data Visualization by David Quintana!</p>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <a href="https://www.linkedin.com/in/david-quintana-60994323a/" target="_blank">
+            <img src="./linkedin.png" alt="LinkedIn" class="footer-icon">
+        </a>
+        <a href="https://github.com/davidaquintana" target="_blank">
+            <img src="./github.png" alt="GitHub" class="footer-icon">
+        </a>
+    </footer>
+
+    <script>
+        const margin = { top: 20, right: 30, bottom: 50, left: 50 };
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        const svg = d3.select("#background")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+        d3.csv("streamgraph_data.csv").then(data => {
+            const keys = data.columns.slice(1);
+
+            data.forEach(d => {
+                d.week = +d.week;
+                keys.forEach(key => {
+                    d[key] = +d[key];
+                });
+            });
+
+            const stack = d3.stack().keys(keys).offset(d3.stackOffsetWiggle);
+            let stackedData = stack(data);
+
+            const x = d3.scaleLinear()
+                .domain(d3.extent(data, d => d.week))
+                .range([0, width]);
+
+            const y = d3.scaleLinear()
+                .domain([
+                    d3.min(stackedData, layer => d3.min(layer, d => d[0])),
+                    d3.max(stackedData, layer => d3.max(layer, d => d[1]))
+                ])
+                .range([height, 0]);
+
+            const area = d3.area()
+                .x(d => x(d.data.week))
+                .y0(d => y(d[0]))
+                .y1(d => y(d[1]))
+                .curve(d3.curveBasis);
+
+            svg.selectAll("path")
+                .data(stackedData)
+                .join("path")
+                .attr("fill", (d, i) => color(i))
+                .attr("d", d => area(d.map(point => ({ data: point.data, 0: 0, 1: 0 }))))
+                .transition()
+                .duration(1500)
+                .attr("d", area);
+
+            function updateData() {
+                stackedData = stack(data.map(d => {
+                    const jitter = Math.sin(d.week * 0.3) * 2;
+                    const updated = {};
+                    keys.forEach(key => {
+                        updated[key] = d[key] + jitter * Math.random();
+                    });
+                    return { ...d, ...updated };
+                }));
+
+                svg.selectAll("path")
+                    .data(stackedData)
+                    .transition()
+                    .duration(1500)
+                    .attr("d", area);
+            }
+
+            setInterval(updateData, 3000);
+        });
+    </script>
+</body>
+</html>
